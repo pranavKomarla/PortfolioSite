@@ -7,6 +7,7 @@ import { theme } from './styles/theme';
 import styled from '@emotion/styled';
 
 // Lazy load non-critical components
+const Experience = lazy(() => import('./components/sections/Experience'));
 const Projects = lazy(() => import('./components/sections/Projects'));
 const Skills = lazy(() => import('./components/sections/Skills'));
 const Contact = lazy(() => import('./components/sections/Contact'));
@@ -36,6 +37,9 @@ function App() {
         <Hero />
         
         {/* Wrap non-critical sections in Suspense */}
+        <Suspense fallback={<LoadingFallback>Loading experience...</LoadingFallback>}>
+          <Experience />
+        </Suspense>
         <Suspense fallback={<LoadingFallback>Loading projects...</LoadingFallback>}>
           <Projects />
         </Suspense>

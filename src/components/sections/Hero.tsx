@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { theme } from '../../styles/theme';
 import { keyframes } from '@emotion/react';
 import { lazy, Suspense } from 'react';
+import profilePhoto from '../../assets/Komarla_Pranav_Photo.png';
 const FaGithub = lazy(() => import('react-icons/fa').then(mod => ({ default: mod.FaGithub })));
 const FaLinkedin = lazy(() => import('react-icons/fa').then(mod => ({ default: mod.FaLinkedin })));
 const FaEnvelope = lazy(() => import('react-icons/fa').then(mod => ({ default: mod.FaEnvelope })));
@@ -40,10 +41,50 @@ const HeroContent = styled.div`
   border-radius: 20px;
   padding: ${theme.spacing.lg};
   border: none;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: ${theme.spacing.lg};
 
   @media (min-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing.xl};
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: ${theme.spacing.xl};
   }
+`;
+
+const HeroText = styled.div`
+  flex: 1;
+  min-width: 0;
+`;
+
+const HeroImageWrapper = styled.div`
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+
+  @media (min-width: ${theme.breakpoints.md}) {
+    width: 260px;
+    height: 260px;
+  }
+
+  @media (min-width: ${theme.breakpoints.lg}) {
+    width: 300px;
+    height: 300px;
+  }
+`;
+
+const HeroImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background: ${theme.colors.glass.card};
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 0 0 4px ${theme.colors.accent}40;
 `;
 
 const fadeUpKeyframes = keyframes`
@@ -59,12 +100,11 @@ const fadeUpKeyframes = keyframes`
 
 const Title = styled.h1`
   animation: ${fadeUpKeyframes} 0.5s ease-out forwards;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 5vw, 3.75rem);
   margin-bottom: ${theme.spacing.md};
   color: ${theme.colors.light};
   line-height: 1.1;
   letter-spacing: -0.02em;
-  white-space: nowrap;
 `;
 
 const Subtitle = styled.h2`
@@ -125,21 +165,22 @@ export const Hero = () => {
     <HeroSection id="hero" role="region" aria-label="Introduction">
       <div className="container">
         <HeroContent>
-          <div>
+          <HeroText>
             <Title role="heading" aria-level={2}>
-              Hi, I'm [Your Name]
+              Hi, I'm Pranav Komarla
             </Title>
             <Subtitle role="heading" aria-level={3}>
-              Full Stack Developer
+              Software Engineer
             </Subtitle>
             <Description role="paragraph">
-              I create elegant solutions to complex problems, specializing in modern web development
-              with a focus on user experience and clean code.
+              I build reliable backend systems and APIs across distributed, microservice-based
+              architectures — from Kafka-driven event pipelines to multi-agent AI platforms —
+              with a focus on scalability, observability, and clean engineering.
             </Description>
             <SocialLinks role="list" aria-label="Social media links">
-              <a 
-                href="https://github.com" 
-                target="_blank" 
+              <a
+                href="https://github.com/pranavKomarla"
+                target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit my GitHub profile"
                 role="listitem"
@@ -149,9 +190,9 @@ export const Hero = () => {
                 </Suspense>
                 <span className="sr-only">GitHub</span>
               </a>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
+              <a
+                href="https://linkedin.com/in/pranav-komarla-43711a247/"
+                target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit my LinkedIn profile"
                 role="listitem"
@@ -161,8 +202,8 @@ export const Hero = () => {
                 </Suspense>
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a 
-                href="mailto:your.email@example.com"
+              <a
+                href="mailto:pranavapps03@gmail.com"
                 aria-label="Send me an email"
                 role="listitem"
               >
@@ -172,7 +213,10 @@ export const Hero = () => {
                 <span className="sr-only">Email</span>
               </a>
             </SocialLinks>
-          </div>
+          </HeroText>
+          <HeroImageWrapper>
+            <HeroImage src={profilePhoto} alt="Portrait of Pranav Komarla" />
+          </HeroImageWrapper>
         </HeroContent>
       </div>
     </HeroSection>

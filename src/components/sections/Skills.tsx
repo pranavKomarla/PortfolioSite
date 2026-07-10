@@ -1,21 +1,29 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { theme } from '../../styles/theme';
-import { 
-  FaReact, 
-  FaNodeJs, 
-  FaDatabase, 
+import {
+  FaJava,
+  FaNodeJs,
   FaDocker,
   FaGitAlt,
-  FaAws
+  FaMicrosoft,
+  FaBrain,
+  FaNetworkWired,
+  FaSearch
 } from 'react-icons/fa';
-import { 
-  SiTypescript,
+import {
   SiJavascript,
   SiPython,
+  SiDotnet,
+  SiCplusplus,
+  SiSpring,
   SiMongodb,
-  SiPostgresql,
-  SiRedux
+  SiMysql,
+  SiApachekafka,
+  SiKubernetes,
+  SiDatadog,
+  SiRedis,
+  SiOpenai
 } from 'react-icons/si';
 
 const SkillsSection = styled.section`
@@ -56,15 +64,18 @@ const SectionTitle = styled(motion.h2)`
 
 const SkillsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: ${theme.spacing.lg};
-  width: 100%;
-  max-width: 1200px;
-  margin-top: ${theme.spacing.xl};
+  width: min(90%, 1300px);
+  margin: ${theme.spacing.xl} auto 0;
 
   @media (min-width: ${theme.breakpoints.md}) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: ${theme.spacing.xl};
+  }
+
+  @media (min-width: ${theme.breakpoints.lg}) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 `;
 
@@ -77,6 +88,7 @@ const SkillCategory = styled(motion.div)`
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   max-width: 400px;
   margin: 0 auto;
   width: 100%;
@@ -97,6 +109,11 @@ const CategoryTitle = styled.h3`
   font-weight: 600;
   position: relative;
   padding-bottom: ${theme.spacing.md};
+  min-width: 0;
+
+  .category-title-text {
+    min-width: 0;
+  }
 
   &::after {
     content: '';
@@ -116,11 +133,18 @@ const CategoryTitle = styled.h3`
 `;
 
 const SkillsList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: ${theme.spacing.md};
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.sm};
   flex: 1;
   width: 100%;
+  min-width: 0;
+`;
+
+const SkillsWrapper = styled(motion.div)`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const SkillItem = styled(motion.div)`
@@ -132,6 +156,11 @@ const SkillItem = styled(motion.div)`
   border-radius: 12px;
   transition: all ${theme.transitions.default};
   background: ${theme.colors.glass.card};
+  min-width: 0;
+
+  > span:not(.sr-only) {
+    min-width: 0;
+  }
 
   svg {
     font-size: clamp(1.1rem, 2vw, 1.5rem);
@@ -153,33 +182,47 @@ const SkillItem = styled(motion.div)`
 
 const skillCategories = [
   {
-    title: 'Frontend',
-    icon: <FaReact />,
+    title: 'Languages',
+    icon: <FaJava />,
     skills: [
-      { name: 'React', icon: <FaReact /> },
-      { name: 'TypeScript', icon: <SiTypescript /> },
+      { name: 'Java', icon: <FaJava /> },
+      { name: 'Python', icon: <SiPython /> },
       { name: 'JavaScript', icon: <SiJavascript /> },
-      { name: 'Redux', icon: <SiRedux /> },
+      { name: 'C#', icon: <SiDotnet /> },
+      { name: 'C/C++', icon: <SiCplusplus /> },
     ],
   },
   {
-    title: 'Backend',
+    title: 'Backend & Data',
     icon: <FaNodeJs />,
     skills: [
+      { name: 'Spring', icon: <SiSpring /> },
       { name: 'Node.js', icon: <FaNodeJs /> },
-      { name: 'Python', icon: <SiPython /> },
       { name: 'MongoDB', icon: <SiMongodb /> },
-      { name: 'PostgreSQL', icon: <SiPostgresql /> },
+      { name: 'MySQL', icon: <SiMysql /> },
+      { name: 'Apache Kafka', icon: <SiApachekafka /> },
     ],
   },
   {
-    title: 'DevOps',
+    title: 'DevOps & Cloud',
     icon: <FaDocker />,
     skills: [
       { name: 'Docker', icon: <FaDocker /> },
+      { name: 'Kubernetes', icon: <SiKubernetes /> },
       { name: 'Git', icon: <FaGitAlt /> },
-      { name: 'AWS', icon: <FaAws /> },
-      { name: 'CI/CD', icon: <FaDatabase /> },
+      { name: 'Azure DevOps', icon: <FaMicrosoft /> },
+      { name: 'Datadog', icon: <SiDatadog /> },
+    ],
+  },
+  {
+    title: 'AI & Data Systems',
+    icon: <FaBrain />,
+    skills: [
+      { name: 'RAG', icon: <FaBrain /> },
+      { name: 'MCP', icon: <FaNetworkWired /> },
+      { name: 'Vector Search', icon: <FaSearch /> },
+      { name: 'Redis', icon: <SiRedis /> },
+      { name: 'OpenAI', icon: <SiOpenai /> },
     ],
   },
 ];
@@ -218,7 +261,7 @@ const Skills = () => {
       >
         Skills & Expertise
       </SectionTitle>
-      <motion.div
+      <SkillsWrapper
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -226,15 +269,15 @@ const Skills = () => {
       >
         <SkillsContainer role="list">
           {skillCategories.map((category, index) => (
-            <SkillCategory 
-              key={index} 
+            <SkillCategory
+              key={index}
               variants={itemVariants}
               role="listitem"
               aria-labelledby={`category-title-${index}`}
             >
               <CategoryTitle id={`category-title-${index}`}>
                 <span aria-hidden="true">{category.icon}</span>
-                {category.title}
+                <span className="category-title-text">{category.title}</span>
               </CategoryTitle>
               <SkillsList role="list" aria-label={`${category.title} skills`}>
                 {category.skills.map((skill, skillIndex) => (
@@ -252,7 +295,7 @@ const Skills = () => {
             </SkillCategory>
           ))}
         </SkillsContainer>
-      </motion.div>
+      </SkillsWrapper>
     </SkillsSection>
   );
 };

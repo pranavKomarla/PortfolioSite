@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { theme } from '../../styles/theme';
-import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const ContactSection = styled.section`
   position: relative;
@@ -203,23 +203,23 @@ const Contact = () => {
               I'm always interested in hearing about new projects and opportunities.
               Whether you have a question or just want to say hi, feel free to reach out!
             </ContactText>
-            <ContactEmail 
-              href="mailto:your.email@example.com"
+            <ContactEmail
+              href="mailto:pranavapps03@gmail.com"
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              aria-label="Send me an email at your.email@example.com"
+              aria-label="Send me an email at pranavapps03@gmail.com"
             >
               <FaEnvelope aria-hidden="true" />
-              <span>your.email@example.com</span>
+              <span>pranavapps03@gmail.com</span>
             </ContactEmail>
-            <SocialLinks 
+            <SocialLinks
               variants={itemVariants}
               role="list"
               aria-label="Social media links"
             >
-              <SocialLink 
-                href="https://github.com"
+              <SocialLink
+                href="https://github.com/pranavKomarla"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -5 }}
@@ -229,8 +229,8 @@ const Contact = () => {
                 <FaGithub aria-hidden="true" />
                 <span className="sr-only">GitHub</span>
               </SocialLink>
-              <SocialLink 
-                href="https://linkedin.com"
+              <SocialLink
+                href="https://linkedin.com/in/pranav-komarla-43711a247/"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -5 }}
@@ -239,17 +239,6 @@ const Contact = () => {
               >
                 <FaLinkedin aria-hidden="true" />
                 <span className="sr-only">LinkedIn</span>
-              </SocialLink>
-              <SocialLink 
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -5 }}
-                role="listitem"
-                aria-label="Follow me on Twitter"
-              >
-                <FaTwitter aria-hidden="true" />
-                <span className="sr-only">Twitter</span>
               </SocialLink>
             </SocialLinks>
           </ContactContent>
